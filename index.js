@@ -4,10 +4,9 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Hello 222 World!'))
 
-app.get('/services/calendar/leapyear/'), (req, res) => {
-    res.send("OK")
-    console.log(req)
-    if (req.query != null) {
+app.get('/services/calendar/leapyear', (req, res) => {
+    // res.send("OK")
+        if (req.query.year != null) {
         year = parseInt(req.query.year);
         if (year % 4 == 0 && year % 100 == 0 || year % 400 == 0) {
             res.send(
@@ -15,7 +14,7 @@ app.get('/services/calendar/leapyear/'), (req, res) => {
                                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
-                    <link rel="icon" href="plamtree.ico">
+                    <link rel="icon" href= "plamtree.ico">
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Bài Tập 03</title>
@@ -28,17 +27,32 @@ app.get('/services/calendar/leapyear/'), (req, res) => {
                 `
             )
         }else{
-
+            res.send(
+                `<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <link rel="icon" href= "plamtree.ico">
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Bài Tập 03</title>
+                </head>
+                <body>
+                    <h1 style="text-algin:center'>${year}<h1>
+                    <h1 style="text-algin:center>Is not leap year</h1>
+                </body>
+                </html>`
+            )
         }
 
     }else{
         res.send("Missing parms",400)
     }
 }
+)
 
 
 app.get('/services/calculating/:equation', (req, res) => {
-    if (req.query != null) {
+    if (req.query.x != null && req.query.y != null && req.query.z != null) {
         x = parseInt(req.query.x);
         y = parseInt(req.query.y);
         z = parseInt(req.query.z);
