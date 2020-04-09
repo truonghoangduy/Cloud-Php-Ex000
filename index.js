@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello 222 World!'))
 
 app.get('/services/calendar/leapyear/'), (req, res) => {
     res.send("OK")
@@ -15,9 +15,10 @@ app.get('/services/calendar/leapyear/'), (req, res) => {
                                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
+                    <link rel="icon" href="plamtree.ico">
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Document</title>
+                    <title>Bài Tập 03</title>
                 </head>
                 <body>
                     <h1 style="text-algin:center'>${year}<h1>
@@ -57,7 +58,7 @@ app.get('/services/calculating/:equation', (req, res) => {
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Document</title>
+                    <title>Bài Tập 03</title>
                 </head>
                 <body>
                     <div>
@@ -81,7 +82,7 @@ app.get('/services/calculating/:equation', (req, res) => {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <title>Bài Tập 03</title>
             </head>
             <body>
                 <div>
@@ -104,7 +105,7 @@ app.get('/services/calculating/:equation', (req, res) => {
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <title>Bài Tập 03</title>
             </head>
             <body>
                 <div>
