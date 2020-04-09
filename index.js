@@ -131,4 +131,4 @@ function renderEquation(equationInURL) {
 
 
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(process.env.PORT ||4000, () => console.log(`Example app listening at http://localhost:${port}`))
