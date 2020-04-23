@@ -4,51 +4,60 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Hello 222 World!'))
 
-app.get('/services/calendar/leapyear', (req, res) => {
-    // res.send("OK")
-        if (req.query.year != null) {
-        year = parseInt(req.query.year);
-        if (year % 4 == 0 && year % 100 == 0 || year % 400 == 0) {
-            res.send(
-                `
-                                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <link rel="icon" href= "plamtree.ico">
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Bài Tập 03</title>
-                </head>
-                <body>
-                    <h1 style="text-algin:center'>${year}<h1>
-                    <h1 style="text-algin:center>Is leap year</h1>
-                </body>
-                </html>
-                `
-            )
-        }else{
-            res.send(
-                `<!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <link rel="icon" href= "plamtree.ico">
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Bài Tập 03</title>
-                </head>
-                <body>
-                    <h1 style="text-algin:center'>${year}<h1>
-                    <h1 style="text-algin:center>Is not leap year</h1>
-                </body>
-                </html>`
-            )
+app.get("/ngayKeTiep", (req, res) => {
+    console.log(req.query)
+    if (req.query != null) {
+        a = parseInt(req.query.ngay);
+        b = parseInt(req.query.thang);
+        c = parseInt(req.query.nam);
+        day = new Date(`${c}-${b}-${a}`);
+        console.log(day); // Apr 30 2000
+
+        nextDay = new Date(day);
+        nextDay.setDate(day.getDate() + 1);
+        res.send({
+            requestDay:day,
+            nextDay:nextDay
+        },200)
+
+
+    } else {
+        res.send("Missing parms", 400)
+    }
+})
+
+app.get("/loaiTamGiac", (req, res) => {
+    console.log(req.query)
+    if (req.query != null) {
+        a = req.query.a
+        b = req.query.b
+        c = req.query.c
+        if (a < b + c && b < a + c && c < a + b) {
+            if (a * a == b * b + c * c || b * b == a * a + c * c || c * c == a * a + b * b)
+                sendRespone(res, "Day la tam giac vuong")
+            else if (a == b == c)
+                sendRespone(res, "Day la tam giac deu")
+            else if (a == b || a == c || b == c)
+                sendRespone(res, "Day la tam giac can")
+            else if (a * a > b * b + c * c || b * b > a * a + c * c || c * c > a * a + b * b)
+                sendRespone(res, "Day la tam giac tu")
+            else
+                sendRespone(res, "Day la tam giac nhon")
+        }
+        else {
+            sendRespone(res, "Ba canh a, b, c khong phai la ba canh cua mot tam giac");
+
         }
 
-    }else{
-        res.send("Missing parms",400)
+
+    } else {
+        res.send("Missing parms", 400)
     }
+})
+
+function sendRespone(res, result) {
+    res.send(result, 200)
 }
-)
 
 
 app.get('/services/calculating/:equation', (req, res) => {
@@ -132,8 +141,8 @@ app.get('/services/calculating/:equation', (req, res) => {
             </html>`)
         }
 
-    }else{
-        res.send("Missing parms",400)
+    } else {
+        res.send("Missing parms", 400)
     }
 })
 
@@ -146,4 +155,4 @@ function renderEquation(equationInURL) {
 
 
 
-app.listen(process.env.PORT ||4000, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(process.env.PORT || 3000, () => console.log(`Example app listening at http://localhost:${port}`))
